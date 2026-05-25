@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://q0iv7hqlkl16"]
+
+[ext_resource type="Script" uid="uid://b8iuet8ulitng" path="res://Scripts/paddle_controller.gd" id="1_431s3"]
+[ext_resource type="Script" uid="uid://bmfahx00u1ckk" path="res://Scripts/ball_script.gd" id="1_kw7tr"]
+[ext_resource type="Texture2D" uid="uid://neinc785lt3k" path="res://icon.svg" id="2_431s3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_431s3"]
+size = Vector2(80, 65.43078)
+
+[sub_resource type="Gradient" id="Gradient_4s7ij"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rv1dk"]
+gradient = SubResource("Gradient_4s7ij")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4s7ij"]
+radius = 11.1947775
+
+[sub_resource type="Gradient" id="Gradient_kw7tr"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.59638554)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_431s3"]
+gradient = SubResource("Gradient_kw7tr")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_431s3"]
+offsets = PackedFloat32Array(0, 0.6385542, 0.9879518, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.7816632, 0.7816632, 0.7816632, 1, 0.91566265, 0.91566265, 0.91566265, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4s7ij"]
+gradient = SubResource("Gradient_431s3")
+width = 1280
+fill_from = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rv1dk"]
+size = Vector2(1282, 64)
+
+[node name="Scene Root (?)" type="Node2D" unique_id=1635864479]
+
+[node name="Left Paddle" type="RigidBody2D" parent="." unique_id=1357501566]
+position = Vector2(40.365, 320.325)
+gravity_scale = 0.0
+lock_rotation = true
+freeze_mode = 1
+custom_integrator = true
+script = ExtResource("1_431s3")
+MoveUpInput = "L_Up"
+MoveDownInput = "L_Down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left Paddle" unique_id=716943177]
+scale = Vector2(0.09999999, 0.917)
+shape = SubResource("RectangleShape2D_431s3")
+
+[node name="Paddle Sprite" type="Sprite2D" parent="Left Paddle" unique_id=1264071034]
+scale = Vector2(0.1, 0.917)
+texture = SubResource("GradientTexture2D_rv1dk")
+
+[node name="Ball" type="CharacterBody2D" parent="." unique_id=1899914764]
+position = Vector2(562.85, 321)
+script = ExtResource("1_kw7tr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=1039583464]
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CircleShape2D_4s7ij")
+
+[node name="Ball Mask" type="Sprite2D" parent="Ball" unique_id=1545032260]
+clip_children = 1
+scale = Vector2(0.2, 0.2)
+texture = SubResource("GradientTexture2D_431s3")
+
+[node name="Ball Sprite" type="Sprite2D" parent="Ball/Ball Mask" unique_id=434823014]
+texture = ExtResource("2_431s3")
+
+[node name="TopWall" type="RigidBody2D" parent="." unique_id=1026938286]
+position = Vector2(562.85, 0)
+rotation = 3.1415927
+lock_rotation = true
+freeze = true
+
+[node name="Sprite2D" type="Sprite2D" parent="TopWall" unique_id=529487882]
+texture = SubResource("GradientTexture2D_4s7ij")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall" unique_id=1773683159]
+position = Vector2(1.1500244, 0)
+shape = SubResource("RectangleShape2D_rv1dk")
+
+[node name="BottomWall" type="RigidBody2D" parent="." unique_id=1310589132]
+position = Vector2(562.85, 642)
+lock_rotation = true
+freeze = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BottomWall" unique_id=491610206]
+texture = SubResource("GradientTexture2D_4s7ij")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall" unique_id=927451771]
+position = Vector2(1.1500244, 0)
+shape = SubResource("RectangleShape2D_rv1dk")
+
+[node name="Right Paddle" type="RigidBody2D" parent="." unique_id=530730924]
+position = Vector2(1084, 320.325)
+rotation = 3.1415927
+gravity_scale = 0.0
+lock_rotation = true
+freeze_mode = 1
+custom_integrator = true
+script = ExtResource("1_431s3")
+MoveUpInput = "R_Up"
+MoveDownInput = "R_Down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right Paddle" unique_id=1751662463]
+scale = Vector2(0.09999999, 0.917)
+shape = SubResource("RectangleShape2D_431s3")
+
+[node name="Paddle Sprite" type="Sprite2D" parent="Right Paddle" unique_id=653936746]
+scale = Vector2(0.1, 0.917)
+texture = SubResource("GradientTexture2D_rv1dk")
